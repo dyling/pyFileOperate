@@ -1,10 +1,29 @@
 import os
 import re
+import csv
 # import shutil
 import win_unicode_console
 win_unicode_console.enable()
 
 wantFileType = ['.mp4', '.rmvb', '.avi', '.mkv']
+
+
+class operFileCsv():
+    def __init__(self, filename=None):
+        self.filename = filename
+
+    def readCsvFile(self):
+        readCsvHandler = open(self.filename, 'r')
+        filelines = csv.reader(readCsvHandler, dialect='excel')
+        for fileline in filelines:
+            print(fileline)
+        readCsvHandler.close
+
+    def writeCsvFile(self, writeline):
+        writeCsvHandler = open(self.filename, 'a', newline='')
+        csvWrite = csv.writer(writeCsvHandler, dialect='excel')
+        csvWrite.writerow(writeline)
+        writeCsvHandler.close()
 
 
 class findFileClass():
@@ -103,8 +122,9 @@ class operfile:
         if not self.filetype:
             return
         if self.oper == 3:
-            if filepath[-3:] == self.filetype:
-                print('Deal file: [{0}].'.format(filepath))
+            num = len(self.filetype)
+            if filepath[-num:] == self.filetype:
+                print('Delete file: [{0}].'.format(filepath))
                 os.remove(filepath)
         elif self.oper == 4:
             num = len(self.filetype)
@@ -145,10 +165,13 @@ class operfile:
 if __name__ == "__main__":
 
     # filename = 'E:/C_yuyan/visual_studio_2015/Thermal_Power_FlaskWeb/FlaskWebProject4'
-    filename = 'E:/C_yuyan/visual_studio_code/dylLib/pyFileOperate'
+    # filename = 'E:/C_yuyan/visual_studio_code/dylLib/pyFileOperate'
+    filename = 'E:/C_yuyan/visual_studio_2015/Thermal_Power_FlaskWeb/FlaskWebProject4'
+    filename = 'E:/C_yuyan/visual_studio_2015/Thermal_Power_FlaskWeb/FlaskWebProject4/'
     deletetype = 'pyc'
     modifytype = '__init__.py'
 
-    operfile(filename=filename, oper=3, filetype=deletetype).deal_process()
-    operfile(filename=filename, oper=4, filetype=modifytype).deal_process()
+    # operfile(filename=filename, oper=3, filetype=deletetype).deal_process()
+    # operfile(filename=filename, oper=4, filetype=modifytype).deal_process()
+    operfile(filename=filename, oper=1, filetype=modifytype).deal_process()
 
