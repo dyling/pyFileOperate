@@ -2,8 +2,8 @@ import os
 import re
 import csv
 # import shutil
-import win_unicode_console
-win_unicode_console.enable()
+# import win_unicode_console
+# win_unicode_console.enable()
 
 wantFileType = ['.mp4', '.rmvb', '.avi', '.mkv']
 
